@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -29,9 +32,24 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
             createActors();
+            createActorAdapter();
 
             return insets;
         });
+    }
+
+    private void createActorAdapter(){
+        ArrayList<String> names = new ArrayList<String>();
+        for (Actor actor : actors){
+            names.add(actor.getFirstName() + " " + actor.getLastName());
+        }
+
+        RecyclerView rvActors = findViewById(R.id.rvActors);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvActors.setLayoutManager(layoutManager);
+        ActorAdapter actorAdapter = new ActorAdapter(actors, this);
+        //actorAdapter.setOnItemClickListener(OnClickListener);
+        rvActors.setAdapter(actorAdapter);
     }
 
     private void createActors() {
@@ -120,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void ReadXMLFile() {
+        try {
+            FileIO fileIO = new FileIO();
+            actors = fileIO.readXMLFile(XMLFILENAME, this);
+            Log.d(TAG, "ReadXMLFile: ");
+        }catch (Exception e){
+            Log.d(TAG, "ReadXMLFile: " + e.getMessage());
+        }
     }
     private void WriteXMLFile() {
         try {

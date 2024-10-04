@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FileIODemo</string>
+    <string name="write_xml">Write XML</string>
+    <string name="read_xml">Read XML</string>
+    <string name="write_text">Write Text</string>
+    <string name="read_text">Read text</string>
+    <string name="delete">Delete</string>
 </resources>

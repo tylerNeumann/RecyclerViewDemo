@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="read_text">Read Text</string>
+    <string name="write_xml">Write XML</string>
+    <string name="read_xml">Read XML</string>
+    <string name="write_text">Write text</string>
 </resources>

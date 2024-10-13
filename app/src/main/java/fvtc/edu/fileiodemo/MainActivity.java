@@ -37,7 +37,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
-
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+            int position = viewHolder.getAdapterPosition();
+            int id = actors.get(position).getId();
+            Actor actor = actors.get(position);
+            Log.d(TAG, "onClick: " + actor.getFirstName());
+        }
+    };
     private void createActorAdapter(){
         ArrayList<String> names = new ArrayList<String>();
         for (Actor actor : actors){
@@ -48,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvActors.setLayoutManager(layoutManager);
         ActorAdapter actorAdapter = new ActorAdapter(actors, this);
-        //actorAdapter.setOnItemClickListener(OnClickListener);
+        actorAdapter.setOnItemClickListener((onClickListener));
         rvActors.setAdapter(actorAdapter);
     }
 

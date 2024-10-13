@@ -26,7 +26,7 @@ public class ActorAdapter extends RecyclerView.Adapter{
         public ActorViewHolder(@NonNull View itemView) {
             super(itemView);
             tvFirstName = itemView.findViewById(R.id.tvFirstName);
-            //tvLastName = itemView.findViewById(R.id.tvLastName);
+            tvLastName = itemView.findViewById(R.id.tvLastName);
             //code involved with clicking an item in the list
 
             itemView.setTag(this);
@@ -37,7 +37,7 @@ public class ActorAdapter extends RecyclerView.Adapter{
         {
             return tvFirstName;
         }
-        /*public TextView getTvLastName() { return tvLastName; }*/
+        public TextView getTvLastName() { return tvLastName; }
 
     }
 
@@ -54,7 +54,7 @@ public class ActorAdapter extends RecyclerView.Adapter{
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_item_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.complex_item_view, parent, false);
         return new ActorViewHolder(v);
     }
 
@@ -63,9 +63,13 @@ public class ActorAdapter extends RecyclerView.Adapter{
         Log.d(TAG, "onBindViewHolder: " + actorData.get(position));
         ActorViewHolder actorViewHolder = (ActorViewHolder) holder;
         actorViewHolder.getTvFirstName().setText(actorData.get(position).getFirstName());
-        //actorViewHolder.getTvLastName().setText(actorData.get(position).getLastName());
+        actorViewHolder.getTvLastName().setText(actorData.get(position).getLastName());
     }
 
     @Override
     public int getItemCount() { return actorData.size(); }
+    private void deleteItem(int position){
+        actorData.remove(position);
+        notifyDataSetChanged();
+    }
 }
